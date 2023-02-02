@@ -1,0 +1,1 @@
+// we can put our constants like colors and strings here.
