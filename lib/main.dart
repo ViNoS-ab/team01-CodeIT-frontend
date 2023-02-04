@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:team01_codit_frontend/views/navigation/navigation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,8 +12,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'orgnizers app',
       theme: ThemeData(
+        useMaterial3: true,
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -24,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Scaffold(),
+      home:  Navigation(),
     );
   }
 }
