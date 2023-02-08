@@ -5,6 +5,7 @@ import 'package:team01_codit_frontend/models/Tasks_info.dart';
 import 'package:team01_codit_frontend/size_config.dart';
 import 'package:team01_codit_frontend/utils/constants.dart';
 
+
 class MyTasksScreen extends StatefulWidget {
   const MyTasksScreen({Key? key}) : super(key: key);
 
@@ -14,18 +15,22 @@ class MyTasksScreen extends StatefulWidget {
 
 class _MyTasksScreenState extends State<MyTasksScreen> {
   List<TasksModel> Tasks = [
-    TasksModel("Writing the PV of the Last meeting", false),
-    TasksModel("Finishing UI ", false),
-    TasksModel("Fixing bugs", false),
-    TasksModel("push in the main branche", false),
-    TasksModel("code Tasks Widget", false),
-    TasksModel("Integrating the backend", false),
-    TasksModel("Building APK", false),
+    TasksModel("Writing the PV of the Last meeting", false,'GIP project'),
+    TasksModel("Finishing UI ", false,'DevFest'),
+    TasksModel("Fixing bugs", false,'GIP project'),
+    TasksModel("push in the main branche", false,'DevFest'),
+    TasksModel("code Tasks Widget", false,'GIP project'),
+    TasksModel("Integrating the backend", false,'DevFest'),
+    TasksModel("Building APK", false,'GIP project'),
+    TasksModel('Talent Screen', false, 'FlutterFest'),
+    TasksModel('My profile', false, 'FlutterFest'),
+    TasksModel('Preparing presentation', false, 'DevFest'),
+
+
   ];
 
   List<TasksModel> selectedTasks = [];
   List<String> Events = ['GIP project', 'DevFest', 'FlutterFest', 'Meeting'];
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -199,24 +204,31 @@ class _MyTasksScreenState extends State<MyTasksScreen> {
                                           itemBuilder: (BuildContext context,
                                               int index) {
                                             // return item
-                                            return Column(
+                                            return Events[index2]==Tasks[index].event
+                                            ?Column(
                                               children: [
                                                 contactItem(
                                                   Tasks[index].name,
                                                   Tasks[index].isSelected,
                                                   index,
+                                                  Tasks[index].event
                                                 ),
                                                 SvgPicture.asset(
                                                     'assets/icons/Line 1.svg'),
                                               ],
-                                            );
+                                            )
+                                            :SizedBox();
                                           }),
                                 ),
                               )
                             ],
                           );
                         }),
-                  ))
+                  )),
+
+
+
+
             ],
           ),
         ),
@@ -224,7 +236,7 @@ class _MyTasksScreenState extends State<MyTasksScreen> {
     );
   }
 
-  Widget contactItem(String name, bool isSelected, int index) {
+  Widget contactItem(String name, bool isSelected, int index,String event) {
     return ListTile(
       title: Text(
         name,
@@ -241,13 +253,14 @@ class _MyTasksScreenState extends State<MyTasksScreen> {
         setState(() {
           Tasks[index].isSelected = !Tasks[index].isSelected;
           if (Tasks[index].isSelected == true) {
-            selectedTasks.add(TasksModel(name, true));
+            selectedTasks.add(TasksModel(name, true,event));
           } else if (Tasks[index].isSelected == false) {
             selectedTasks
                 .removeWhere((element) => element.name == Tasks[index].name);
           }
         });
       },
+
     );
   }
 }
