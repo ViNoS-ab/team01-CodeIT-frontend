@@ -4,6 +4,8 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:team01_codit_frontend/models/Tasks_info.dart';
 import 'package:team01_codit_frontend/size_config.dart';
 import 'package:team01_codit_frontend/utils/constants.dart';
+import 'package:team01_codit_frontend/views/Profile_section/Profile_animation.dart';
+
 
 
 class MyTasksScreen extends StatefulWidget {
@@ -28,7 +30,7 @@ class _MyTasksScreenState extends State<MyTasksScreen> {
 
 
   ];
-
+   int progress=0;
   List<TasksModel> selectedTasks = [];
   List<String> Events = ['GIP project', 'DevFest', 'FlutterFest', 'Meeting'];
   @override
@@ -45,13 +47,30 @@ class _MyTasksScreenState extends State<MyTasksScreen> {
               ),
               Padding(
                 padding: EdgeInsets.only(left: getWidth(65)),
-                child: Text(
-                  'My Tasks',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: getHeight(36),
-                    fontWeight: FontWeight.w700,
-                  ),
+                child: Row(
+                  children: [
+                    Text(
+                      'My Tasks',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: getHeight(36),
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    SizedBox(width: getWidth(100),),
+                    InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SecondScreen())),
+
+                      child: Icon(Icons.person_rounded,
+                    size: getHeight(50),
+                    ),
+                    
+                    
+                    )
+                  ],
                 ),
               ),
               SizedBox(
@@ -68,7 +87,7 @@ class _MyTasksScreenState extends State<MyTasksScreen> {
                         animation: true,
                         lineHeight: 20.0,
                         animationDuration: 2500,
-                        percent: 0.47,
+                        percent: progress/Tasks.length,
                         progressColor: kGreen,
                         barRadius: Radius.circular(getHeight(20)),
                       ),
@@ -77,7 +96,7 @@ class _MyTasksScreenState extends State<MyTasksScreen> {
                       width: getWidth(3),
                     ),
                     Text(
-                      '47%',
+                      (progress*100/Tasks.length).toString()+' %',
                       style: TextStyle(
                         color: const Color(0xFF223F61),
                         fontSize: getHeight(14),
@@ -254,9 +273,12 @@ class _MyTasksScreenState extends State<MyTasksScreen> {
           Tasks[index].isSelected = !Tasks[index].isSelected;
           if (Tasks[index].isSelected == true) {
             selectedTasks.add(TasksModel(name, true,event));
+            progress++;
           } else if (Tasks[index].isSelected == false) {
+            progress--;
             selectedTasks
                 .removeWhere((element) => element.name == Tasks[index].name);
+
           }
         });
       },

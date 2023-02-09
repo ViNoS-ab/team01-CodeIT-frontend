@@ -1,13 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:team01_codit_frontend/size_config.dart';
 import 'package:team01_codit_frontend/utils/constants.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:team01_codit_frontend/views/navigation/my_tasks_screen/my_tasks_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
     List<Widget> listView = [
       Padding(
         padding: const EdgeInsets.only(bottom: 8.0),
@@ -22,8 +26,8 @@ class MainScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(Icons.add),
-              Text(
+              const Icon(Icons.add),
+              const Text(
                 'Description',
                 style: TextStyle(fontSize: 24),
               )
@@ -43,10 +47,10 @@ class MainScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(borderRadius)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [Icon(Icons.person, size: 36), Text('18')],
+                children: [const Icon(Icons.person, size: 36), const Text('18')],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Expanded(
@@ -70,10 +74,10 @@ class MainScreen extends StatelessWidget {
                       backgroundColor: Colors.grey,
                       progressColor: Colors.red,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
-                    Text('87 %'),
+                    const Text('87 %'),
                   ],
                 ),
               ),
@@ -90,21 +94,42 @@ class MainScreen extends StatelessWidget {
             color: Colors.red,
             borderRadius: BorderRadius.circular(borderRadius),
           ),
-          child: Center(
+          child: const Center(
               child: Text(
             'Deadline : 24 Aug 2023',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
           )),
         ),
       ),
-      SizedBox(
-        height: 200,
-      ),
+
+      InkWell(
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const MyTasksScreen())),
+        child: Container(
+          height: getHeight(60),
+          width: getWidth(180),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(getHeight(20)),
+            color:  const Color(0xFF0A27E0),
+          ),
+          child: Center(
+            child: Text('Visit My tasks',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+              fontSize: getHeight(20),
+            ),
+            ),
+          ),
+        ),
+      )
     ];
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('DevFest',style: TextStyle(fontSize: 32,color: Colors.blue) ,),
+        title: const Text('DevFest',style: TextStyle(fontSize: 32,color: Colors.blue) ,),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
