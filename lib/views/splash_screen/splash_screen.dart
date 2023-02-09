@@ -2,8 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:async';
-
-import 'package:team01_codit_frontend/views/navigation/my_tasks_screen/my_tasks_screen.dart';
+import 'package:team01_codit_frontend/views/on_boarding_screen/on_boarding_screen.dart';
 
 class MyWidget extends StatefulWidget {
   @override
@@ -131,7 +130,7 @@ class _SecondPageState extends State<SecondPage> {
     Timer(const Duration(milliseconds: 4000), () {
       Navigator.of(context).pushReplacement(
         ThisIsFadeRoute(
-          route: const MyTasksScreen(), page: const MyTasksScreen(),
+          route: const Onboarding(), page: const Onboarding(),
         ),
       );
     });
