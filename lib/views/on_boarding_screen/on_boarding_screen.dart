@@ -206,7 +206,7 @@ class _OnboardingState extends State<Onboarding> {
                       bottom: getHeight(40),
                       left: getWidth(20),
                     ),
-                    Positioned(child: Text('Let\'s study together',
+                    Positioned(child: Text('Let\'s work together',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
